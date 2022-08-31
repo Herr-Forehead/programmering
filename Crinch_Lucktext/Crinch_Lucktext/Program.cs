@@ -20,5 +20,6 @@ iSport = Console.ReadLine();
 
 Console.WriteLine($"Hej {name}! du har precis vunnit en biljett det bästa hotellet någonsin, där {food} serveras varje dag, {fSport} är olagligt och {iSport} är obligatoriskt. Ses snart~! (ps. Du kan också kolla på Morbius varje dag)");
 
+Console.WriteLine("bye")
 
 Console.ReadLine();
