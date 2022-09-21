@@ -16,15 +16,17 @@ while (restart == "yes")
             string choiceInspect = Console.ReadLine();
             if (choiceInspect == "yes")
             {
-                Console.WriteLine("you take the dagger. Do you want to inspecting the campsite or do you continue walking down the path(y/n)");
-                string choiceDagger = "yes";
-                while (choiceDagger == "yes" || choiceDagger == "y")
+                Console.WriteLine("you take the dagger.");
+                string choiceContinueSearch = "yes";
+                while (choiceContinueSearch == "yes" || choiceContinueSearch == "y")
                 {
+                    Console.WriteLine("Do you want to keep inspecting the campsite or do you continue walking down the path(y/n)");
+                    choiceContinueSearch = Console.ReadLine();
                     Console.WriteLine("with a dagger in hand you continue down the path.");
                 }
 
             }
-            else 
+            else
             {
                 Console.WriteLine("You do not take the dagger.");
             }
@@ -48,11 +50,13 @@ while (restart == "yes")
         }
         else if (choiceCampsite == "continue")
         {
-            Console.WriteLine("You continue down the path ");
+            Console.WriteLine("You continue down the path to see a dire scene. The caravan has been utterly destroyed, it's horses all killed left only with different gash wounds and the vehicles are all destroyed. ");
         }
         else
         {
-            Console.WriteLine("You didn't get lake but could look at the sword.");
+            Console.WriteLine("You sit down in the middle of the abandoned campsite and do nothing");
+            Console.WriteLine("");
+            Console.WriteLine("the end");
         }
     }
     else if (choiceBeginning == "right")
@@ -61,7 +65,11 @@ while (restart == "yes")
         string choiceHouse = Console.ReadLine();
         if (choiceHouse == "enter")
         {
-            Console.WriteLine("You open the door to the house and immedeately notices that there's a kettle with something brewing inside.");
+            Console.WriteLine("You open the door to the house and immedeately notices that there's a kettle with something brewing. ");
+        }
+        else if (choiceHouse == "explore")
+        {
+            Console.WriteLine("");
         }
     }
     else if (choiceBeginning == "cum")
@@ -92,9 +100,19 @@ while (restart == "yes")
         {
             Console.WriteLine("You start to run towards the right, ");
         }
-        else if(choiceHowling == "run left" || choiceHowling == "left")
+        else if (choiceHowling == "run left" || choiceHowling == "left")
         {
             Console.WriteLine("");
+        }
+        else if (choiceHowling == "jump")
+        {
+            Console.WriteLine("Fearing for your life you decide to go down at your own accord and jump down the ravine, you die instantly");
+            Console.WriteLine("");
+            Console.WriteLine("the end");
+        }
+        else 
+        {
+            Console.WriteLine("waht?");
         }
     }
     else if (choiceBeginning == "jump")
@@ -102,23 +120,15 @@ while (restart == "yes")
         Console.WriteLine("You decide to jump off the ravine and you die when you hit the ground.");
         Console.WriteLine("...");
         Console.WriteLine("what did you think was going to happen?");
-        Console.WriteLine("");
-        Console.WriteLine("wanna try again?");
-        if (restart == "yes")
-        {
-            restart = Console.ReadLine();  
-        }
-        else
-        {
-           
-        }
     }
     else
     {
-        Console.WriteLine("waht?");
+        Console.WriteLine("You do nothing and fall asleep on the spot.");
+        Console.WriteLine("");
+        Console.WriteLine("the end");
     }
 
-    Console.WriteLine("You sure you want to restart?");
+    Console.WriteLine("Wanna restart?");
     restart = Console.ReadLine();
 }
 

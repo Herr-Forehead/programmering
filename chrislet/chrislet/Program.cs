@@ -13,9 +13,9 @@
 
 // hitpoints++;
 
-int xLocation = 100*2;
+// int xLocation = 100*2;
 
-Console.WriteLine(xLocation);
+// Console.WriteLine(xLocation);
 
 
 
