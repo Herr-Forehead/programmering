@@ -29,16 +29,19 @@ Console.WriteLine("BoringBasicHero attacks DaVillain");
         Console.WriteLine("BoringBasicHero tries to attack DaVillain but DaVillain breakdance dodges the attack");
         Console.WriteLine($"In other words, the attack misses and DaVillain still has {p2HP}HP");
     }
+    hitRoll = generator.Next(101);
+    dmg = generator.Next(51);
+    crit = generator.Next(50,101);
     Console.WriteLine("DaVillain proceeds to counter BoringBasicHero's attack with one of his own");
     if (hitRoll > 99)
     {
-        p2HP -= crit;
+        p1HP -= crit;
         Console.WriteLine($"DaVillain starts breakdancing and implements a bunch of kicks and punches that all hit BoringBasicHero and deals {crit} damage");
         Console.WriteLine($"BoringBasicHero now has {p1HP}HP left");
     }
     else if (hitRoll > 40)
     {
-        p2HP -= dmg;
+        p1HP -= dmg;
         Console.WriteLine($"DaVillain does a basic breakdancing spin move and kicks BoringBasicHero in the face dealing {dmg} damage");
         Console.WriteLine($"BoringBasicHero now has {p1HP}HP left");
     }
@@ -56,9 +59,9 @@ if (p1HP > 0 && p2HP < 0)
 }
 else if (p1HP < 0 && p2HP > 0)
 {
-    Console.WriteLine("DaVillain wins");
+    Console.WriteLine("DaVillain wins and breakdances on BoringBasicHero's corpse");
 }
-else if (p1HP == 0 && p2HP == 0)
+else if (p1HP == 0 || p1HP < 0  && p2HP == 0 || p2HP < 0)
 {
     Console.WriteLine("No one wins");
 }
