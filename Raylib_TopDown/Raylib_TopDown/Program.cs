@@ -30,6 +30,22 @@ while (Raylib.WindowShouldClose() == false)
     {
         playerRect.y += speed;
     }
+    else if (Raylib.IsKeyDown(KeyboardKey.KEY_DOWN))
+    {
+        playerRect.y += speed;
+    }
+    else if (Raylib.IsKeyDown(KeyboardKey.KEY_RIGHT))
+    {
+        playerRect.x += speed;
+    }
+    else if (Raylib.IsKeyDown(KeyboardKey.KEY_UP))
+    {
+        playerRect.y -= speed;
+    }
+    else if (Raylib.IsKeyDown(KeyboardKey.KEY_LEFT))
+    {
+        playerRect.x -= speed;
+    }
 
 
     // Grafik
