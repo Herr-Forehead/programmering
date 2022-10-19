@@ -14,37 +14,21 @@ while (Raylib.WindowShouldClose() == false)
 {
     // Logik
 
-    if (Raylib.IsKeyDown(KeyboardKey.KEY_D))
+    if (Raylib.IsKeyDown(KeyboardKey.KEY_D) || Raylib.IsKeyDown(KeyboardKey.KEY_RIGHT))
     {
         playerRect.x += speed;
     }
-    else if (Raylib.IsKeyDown(KeyboardKey.KEY_A))
+    else if (Raylib.IsKeyDown(KeyboardKey.KEY_A) || Raylib.IsKeyDown(KeyboardKey.KEY_LEFT))
     {
         playerRect.x -= speed;
     }
-    else if (Raylib.IsKeyDown(KeyboardKey.KEY_W))
+    else if (Raylib.IsKeyDown(KeyboardKey.KEY_W) || Raylib.IsKeyDown(KeyboardKey.KEY_UP))
     {
         playerRect.y -= speed;
     }
-    else if (Raylib.IsKeyDown(KeyboardKey.KEY_S))
+    else if (Raylib.IsKeyDown(KeyboardKey.KEY_S) || Raylib.IsKeyDown(KeyboardKey.KEY_DOWN))
     {
         playerRect.y += speed;
-    }
-    else if (Raylib.IsKeyDown(KeyboardKey.KEY_DOWN))
-    {
-        playerRect.y += speed;
-    }
-    else if (Raylib.IsKeyDown(KeyboardKey.KEY_RIGHT))
-    {
-        playerRect.x += speed;
-    }
-    else if (Raylib.IsKeyDown(KeyboardKey.KEY_UP))
-    {
-        playerRect.y -= speed;
-    }
-    else if (Raylib.IsKeyDown(KeyboardKey.KEY_LEFT))
-    {
-        playerRect.x -= speed;
     }
 
 
