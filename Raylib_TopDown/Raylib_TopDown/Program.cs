@@ -4,8 +4,10 @@ Raylib.InitWindow(800, 600, "Leonards crinch spel");
 Raylib.SetTargetFPS(60);
 
 Color royalBlue = new Color(85, 118, 209, 255);
+Color transparent = new Color(255, 255, 255, 0);
 
 Rectangle playerRect = new Rectangle(368, 268, 64, 64);
+Texture2D avatarImage = Raylib.LoadTexture("test_character.png");
 
 float speed = 5;
 
@@ -36,7 +38,12 @@ while (Raylib.WindowShouldClose() == false)
     Raylib.BeginDrawing();
     Raylib.ClearBackground(Color.DARKPURPLE);
 
-Raylib.DrawRectangleRec(playerRect, royalBlue);
+    Raylib.DrawTexture(avatarImage,
+     (int)playerRect.x, 
+     (int)playerRect.y, 
+     Color.WHITE);
+
+    // Raylib.DrawRectangleRec(playerRect, royalBlue);
     // Raylib.DrawRectangle(384, 284, 32, 32, royalBlue);
 
     Raylib.EndDrawing();
