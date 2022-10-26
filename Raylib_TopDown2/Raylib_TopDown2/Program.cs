@@ -18,17 +18,28 @@ enemyRects.Add(new Rectangle(700, 0, enemyTexture.width, enemyTexture.height));
 
 while(!Raylib.WindowShouldClose())
 {
-    // LOGIK
+  // LOGIK
+  for (int i = 0; i < enemyRects.Count; i++)
+  {
+     Rectangle rect = enemyRects[i];
+     rect.y++;
+     enemyRects[i] = rect;
+  }
 
-    // GRAFIK
-    Raylib.BeginDrawing();
-    Raylib.ClearBackground(Color.DARKBLUE);
 
-    Raylib.DrawTexture(enemyTexture, 
-      (int)enemyRects[0].x,
-      (int)enemyRects[0].y,
-      Color.WHITE
-    );
+  // GRAFIK
+  Raylib.BeginDrawing();
+  Raylib.ClearBackground(Color.DARKBLUE);
+
+  foreach(Rectangle rect in enemyRects)
+  {
+     Raylib.DrawTexture(enemyTexture, 
+         (int)rect.x,
+         (int)rect.y,
+         Color.WHITE
+     );
+  }
+
 
     Raylib.EndDrawing();
 }
