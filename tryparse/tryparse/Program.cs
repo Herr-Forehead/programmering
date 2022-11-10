@@ -1,10 +1,33 @@
 ﻿
+// int[] number = {6, 7, 12};
 
-List<string> names = new List<string>();
+// number[1] = 99;
 
-names.Add("Alex");
+List<string> truths = new List<string>();
+
+truths.Add("Leonard(idiot)");
+truths.Add("Leonard(männskligt skräp)");
+truths.Add("Leonard(värdelös)");
+truths.Add("Leonard(ful)");
+truths.Add("Leonard(oälskbar)");
+
+foreach (string truth in truths)
+{
+    Console.WriteLine(truth);
+}
 
 
+// for (int i = 0; i < truths.Count; i++)
+// {
+//    Console.WriteLine(truths[i]);
+// }
+
+// int i = 0;
+// while ( i < 4)
+// {
+//   Console.WriteLine(truths[i]);
+//   i++;
+// }
 
 Console.ReadLine();
 
