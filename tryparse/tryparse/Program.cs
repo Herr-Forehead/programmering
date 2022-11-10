@@ -1,22 +1,11 @@
 ﻿
-// int[] number = {6, 7, 12};
-
-// number[1] = 99;
-
-List<string> truths = new List<string>();
-
-truths.Add("Leonard(idiot)");
-truths.Add("Leonard(männskligt skräp)");
-truths.Add("Leonard(värdelös)");
-truths.Add("Leonard(ful)");
-truths.Add("Leonard(oälskbar)");
-
-foreach (string truth in truths)
-{
-    Console.WriteLine(truth);
-}
-
-
+// foreach (string truth in truths)
+// {
+//   if (truth.Length < 15)
+//     {
+//       Console.WriteLine(truth);
+//     }
+// }
 // for (int i = 0; i < truths.Count; i++)
 // {
 //    Console.WriteLine(truths[i]);
@@ -29,7 +18,11 @@ foreach (string truth in truths)
 //   i++;
 // }
 
+utils.DoSomething();
+
 Console.ReadLine();
+
+
 
 // int num = 0;
 // bool success = false;
