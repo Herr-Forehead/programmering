@@ -23,7 +23,7 @@ int tileSize = 32;
 while (!Raylib.WindowShouldClose())
 {
     // Logik
-
+    int infantryMov = 3;
 
 
     // Grafik
@@ -31,7 +31,7 @@ while (!Raylib.WindowShouldClose())
     Raylib.ClearBackground(Color.WHITE);
     Raylib.DrawTexture(AvatarImage, 0, 0, Color.WHITE);
 
-    for (int x = 0; x < Raylib.GetScreenWidth() / tileSize; x++)
+    for (int x = 0; x < Raylib.GetScreenWidth() + 1 / tileSize; x++)
     {
         Raylib.DrawLine(x * tileSize, 0, x * tileSize, Raylib.GetScreenHeight(), Color.BLACK);
     }
