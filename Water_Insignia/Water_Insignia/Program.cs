@@ -15,6 +15,7 @@ while (!Raylib.WindowShouldClose())
     // Grafik
     Raylib.BeginDrawing();
     Raylib.ClearBackground(Color.WHITE);
+    Raylib.DrawTexture(AvatarImage, 0, 32, Color.WHITE);
 
     for (int x = 0; x < Raylib.GetScreenWidth() / tileSize; x++)
     {
@@ -25,7 +26,6 @@ while (!Raylib.WindowShouldClose())
         Raylib.DrawLine(Raylib.GetScreenWidth(), y * tileSize, 0, y * tileSize, Color.BLACK);
     }
 
-    Raylib.DrawTexture(AvatarImage, 0, 32, Color.BLACK);
 
     // hielo
     Raylib.EndDrawing();
