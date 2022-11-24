@@ -8,11 +8,11 @@
 // add more characters with different movement types
 // add music
 
-// if I get this far, try to add enemies
+// if I get this far, try to add enemies and add turns
 // different weapon types/classes
 // add weapon durability
 // add stats and combat
-// feebly attempt to make somewhat of an enemy AI and add phases/turns
+// feebly attempt to make somewhat of an enemy AI
 
 Raylib.InitWindow(600, 800, "Water Insignia");
 Raylib.SetTargetFPS(60);
