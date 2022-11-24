@@ -1,5 +1,19 @@
 ﻿using Raylib_cs;
 
+// Fire emblemesque game
+
+// create tilesystem
+// make it so that characters can only move through the tiles and only a certain amount of tiles
+// add different kinds of tiles that restrict or affect movement like water or forrest tiles
+// add more characters with different movement types
+// add music
+
+// if I get this far, try to add enemies
+// different weapon types/classes
+// add weapon durability
+// add stats and combat
+// feebly attempt to make somewhat of an enemy AI and add phases/turns
+
 Raylib.InitWindow(600, 800, "Water Insignia");
 Raylib.SetTargetFPS(60);
 
@@ -15,7 +29,7 @@ while (!Raylib.WindowShouldClose())
     // Grafik
     Raylib.BeginDrawing();
     Raylib.ClearBackground(Color.WHITE);
-    Raylib.DrawTexture(AvatarImage, 0, 32, Color.WHITE);
+    Raylib.DrawTexture(AvatarImage, 0, 0, Color.WHITE);
 
     for (int x = 0; x < Raylib.GetScreenWidth() / tileSize; x++)
     {
