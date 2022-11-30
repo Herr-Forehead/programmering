@@ -46,12 +46,12 @@ while (!Raylib.WindowShouldClose())
         }
         else if (Raylib.IsKeyReleased(KeyboardKey.KEY_UP))
         {
-            AvatarRect.y += 32;
+            AvatarRect.y -= 32;
             infantryMov -= 1;
         }
         else if (Raylib.IsKeyReleased(KeyboardKey.KEY_DOWN))
         {
-            AvatarRect.y -= 32;
+            AvatarRect.y += 32;
             infantryMov -= 1;
         }
 
