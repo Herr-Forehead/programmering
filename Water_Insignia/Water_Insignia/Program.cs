@@ -26,9 +26,8 @@ while (!Raylib.WindowShouldClose())
     // Logik
     int infantryMov = 3;
 
-    while (infantryMov > 0 || infantryMov == 0)
+    if (infantryMov >= 0)
     {
-
         if (Raylib.IsKeyReleased(KeyboardKey.KEY_RIGHT))
         {
             AvatarRect.x += 32;
