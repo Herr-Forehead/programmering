@@ -21,8 +21,11 @@ Texture2D AvatarImage = Raylib.LoadTexture("gremory.png");
 Rectangle AvatarRect = new Rectangle(0, 0, AvatarImage.width, AvatarImage.height);
 int tileSize = 32;
 string currentScene = "start";
-    int plrInfantryMov = 3;
-    int nmyInfantryMov = 0;
+int plrInfantryMov = 3;
+int nmyInfantryMov = 0;
+Music MainTheme = Raylib.LoadMusicStream("MainTheme.mp3");
+Music ChasingDaybreak = Raylib.LoadMusicStream("ChasingDaybreak.mp3");
+Music HeritorsOfArcadia = Raylib.LoadMusicStream("HeritorsOfArcadia.mp3");
 
 while (!Raylib.WindowShouldClose())
 {
@@ -79,6 +82,38 @@ while (!Raylib.WindowShouldClose())
             currentScene = "plrTurn";
        }
     }
+    if (currentScene == "gameOver")
+    {
+        if (Raylib.IsKeyPressed(KeyboardKey.KEY_ENTER))
+        {
+            currentScene = "plrTurn";
+        }
+    }
+    if (currentScene == "end")
+    {
+        // as of yet, not achievable
+    }
+
+    // Music
+    if (currentScene == "start")
+    {
+        Raylib.PlayMusicStream(MainTheme);
+        Raylib.UpdateMusicStream(MainTheme);
+    }
+    if (currentScene == "plrTurn" || currentScene == "nmyTurn")
+    {
+        Raylib.PlayMusicStream(ChasingDaybreak);
+        Raylib.UpdateMusicStream(ChasingDaybreak);
+    }
+    if (currentScene == "gameOver")
+    {
+        Raylib.StopMusicStream(ChasingDaybreak);
+    }
+    if (currentScene == "end")
+    {
+        Raylib.PlayMusicStream(HeritorsOfArcadia);
+        Raylib.UpdateMusicStream(HeritorsOfArcadia);
+    }
 
     // Grafik
     Raylib.BeginDrawing();
@@ -86,9 +121,8 @@ while (!Raylib.WindowShouldClose())
 
     if (currentScene == "start")
     {
-        Raylib.DrawText("press Enter to start", 200, 300, 48, Color.DARKBLUE);
+        Raylib.DrawText("press Enter to start", 100, 300, 48, Color.DARKBLUE);
     }
-    
     if (currentScene == "plrTurn" || currentScene == "nmyTurn")
     {
       Raylib.DrawTexture(AvatarImage, (int)AvatarRect.x, (int)AvatarRect.y, Color.WHITE);
@@ -102,7 +136,14 @@ while (!Raylib.WindowShouldClose())
           Raylib.DrawLine(Raylib.GetScreenWidth(), y * tileSize, 0, y * tileSize, Color.BLACK);
       }
     }
-
+    if (currentScene == "gameOver")
+    {
+        Raylib.DrawText ("crinch", 100, 300, 38, Color.RED);
+    }
+    if (currentScene == "end")
+    {
+        Raylib.DrawText ("impossible", 100, 300, 38, Color.DARKBLUE);
+    }
 
     // hielo
     Raylib.EndDrawing();
