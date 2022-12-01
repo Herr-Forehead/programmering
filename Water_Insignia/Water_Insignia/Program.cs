@@ -37,7 +37,6 @@ while (!Raylib.WindowShouldClose())
     }
     if (currentScene == "plrTurn")
     {
-
     if (plrInfantryMov >= 0)
     {
         if (Raylib.IsKeyReleased(KeyboardKey.KEY_RIGHT))
@@ -84,15 +83,24 @@ while (!Raylib.WindowShouldClose())
     // Grafik
     Raylib.BeginDrawing();
     Raylib.ClearBackground(Color.WHITE);
-    Raylib.DrawTexture(AvatarImage, (int)AvatarRect.x, (int)AvatarRect.y, Color.WHITE);
 
-    for (int x = 0; x < Raylib.GetScreenWidth() + 1 / tileSize; x++)
+    if (currentScene == "start")
     {
-        Raylib.DrawLine(x * tileSize, 0, x * tileSize, Raylib.GetScreenHeight(), Color.BLACK);
+        Raylib.DrawText("press Enter to start", 200, 300, 48, Color.DARKBLUE);
     }
-    for (int y = 0; y < Raylib.GetScreenHeight() / tileSize; y++)
+    
+    if (currentScene == "plrTurn" || currentScene == "nmyTurn")
     {
-        Raylib.DrawLine(Raylib.GetScreenWidth(), y * tileSize, 0, y * tileSize, Color.BLACK);
+      Raylib.DrawTexture(AvatarImage, (int)AvatarRect.x, (int)AvatarRect.y, Color.WHITE);
+
+      for (int x = 0; x < Raylib.GetScreenWidth() + 1 / tileSize; x++)
+      {
+          Raylib.DrawLine(x * tileSize, 0, x * tileSize, Raylib.GetScreenHeight(), Color.BLACK);
+      }
+      for (int y = 0; y < Raylib.GetScreenHeight() / tileSize; y++)
+      {
+          Raylib.DrawLine(Raylib.GetScreenWidth(), y * tileSize, 0, y * tileSize, Color.BLACK);
+      }
     }
 
 
