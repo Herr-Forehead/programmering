@@ -19,10 +19,12 @@ Raylib.SetTargetFPS(60);
 
 Texture2D AvatarImage = Raylib.LoadTexture("gremory.png");
 Rectangle AvatarRect = new Rectangle(0, 0, AvatarImage.width, AvatarImage.height);
+Texture2D EnemyImage = Raylib.LoadTexture("Barbarossa.png");
+Rectangle EnemyRect = new Rectangle(0,768, EnemyImage.width, EnemyImage.height);
 int tileSize = 32;
 string currentScene = "start";
 int plrInfantryMov = 3;
-int nmyInfantryMov = 0;
+int nmyFlyingMov = 5;
 Music MainTheme = Raylib.LoadMusicStream("MainTheme.mp3");
 Music ChasingDaybreak = Raylib.LoadMusicStream("ChasingDaybreak.mp3");
 Music HeritorsOfArcadia = Raylib.LoadMusicStream("HeritorsOfArcadia.mp3");
@@ -77,7 +79,7 @@ while (!Raylib.WindowShouldClose())
     }
     if (currentScene == "nmyTurn")
     {
-       if (nmyInfantryMov <= 0)
+       if (nmyFlyingMov >= 0)
        {
             currentScene = "plrTurn";
        }
@@ -102,6 +104,7 @@ while (!Raylib.WindowShouldClose())
     }
     if (currentScene == "plrTurn" || currentScene == "nmyTurn")
     {
+        Raylib.StopMusicStream(MainTheme);
         Raylib.PlayMusicStream(ChasingDaybreak);
         Raylib.UpdateMusicStream(ChasingDaybreak);
     }
@@ -111,6 +114,7 @@ while (!Raylib.WindowShouldClose())
     }
     if (currentScene == "end")
     {
+        Raylib.StopMusicStream(ChasingDaybreak);
         Raylib.PlayMusicStream(HeritorsOfArcadia);
         Raylib.UpdateMusicStream(HeritorsOfArcadia);
     }
@@ -126,6 +130,7 @@ while (!Raylib.WindowShouldClose())
     if (currentScene == "plrTurn" || currentScene == "nmyTurn")
     {
       Raylib.DrawTexture(AvatarImage, (int)AvatarRect.x, (int)AvatarRect.y, Color.WHITE);
+      Raylib.DrawTexture(EnemyImage, (int)EnemyRect.x, (int)EnemyRect.y, Color.WHITE);
 
       for (int x = 0; x < Raylib.GetScreenWidth() + 1 / tileSize; x++)
       {
