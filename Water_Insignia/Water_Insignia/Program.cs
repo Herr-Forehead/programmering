@@ -16,6 +16,7 @@
 
 Raylib.InitWindow(600, 800, "Water Insignia");
 Raylib.SetTargetFPS(60);
+Raylib.InitAudioDevice();
 
 Texture2D AvatarImage = Raylib.LoadTexture("gremory.png");
 Rectangle AvatarRect = new Rectangle(0, 0, AvatarImage.width, AvatarImage.height);
@@ -71,6 +72,11 @@ while (!Raylib.WindowShouldClose())
             plrInfantryMov -= 1;
         }
 
+        if (Raylib.CheckCollisionRecs(AvatarRect, EnemyRect))
+        {
+            currentScene = "gameOver";
+        }
+
         }
         if (plrInfantryMov < 0)
         {
@@ -79,7 +85,27 @@ while (!Raylib.WindowShouldClose())
     }
     if (currentScene == "nmyTurn")
     {
-       if (nmyFlyingMov >= 0)
+       if (AvatarRect.x > EnemyRect.x)
+       {
+        EnemyRect.x += 32;
+        nmyFlyingMov -= 1;
+       }
+       if (AvatarRect.x < EnemyRect.x)
+       {
+        EnemyRect.x -= 32;
+        nmyFlyingMov -= 1;
+       }
+       if (AvatarRect.y > EnemyRect.y)
+       {
+        EnemyRect.y += 32;
+        nmyFlyingMov -= 1;
+       }
+       if (AvatarRect.y < EnemyRect.y)
+       {
+        EnemyRect.y -= 32;
+        nmyFlyingMov -= 1;
+       }
+       if (nmyFlyingMov == 0)
        {
             currentScene = "plrTurn";
        }
@@ -97,6 +123,7 @@ while (!Raylib.WindowShouldClose())
     }
 
     // Music
+
     if (currentScene == "start")
     {
         Raylib.PlayMusicStream(MainTheme);
@@ -104,22 +131,19 @@ while (!Raylib.WindowShouldClose())
     }
     if (currentScene == "plrTurn" || currentScene == "nmyTurn")
     {
-        Raylib.StopMusicStream(MainTheme);
         Raylib.PlayMusicStream(ChasingDaybreak);
         Raylib.UpdateMusicStream(ChasingDaybreak);
     }
     if (currentScene == "gameOver")
     {
-        Raylib.StopMusicStream(ChasingDaybreak);
     }
     if (currentScene == "end")
     {
-        Raylib.StopMusicStream(ChasingDaybreak);
         Raylib.PlayMusicStream(HeritorsOfArcadia);
-        Raylib.UpdateMusicStream(HeritorsOfArcadia);
     }
 
     // Grafik
+
     Raylib.BeginDrawing();
     Raylib.ClearBackground(Color.WHITE);
 
@@ -153,3 +177,5 @@ while (!Raylib.WindowShouldClose())
     // hielo
     Raylib.EndDrawing();
 }
+
+// 私はばかです。
