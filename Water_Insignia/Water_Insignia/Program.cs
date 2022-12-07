@@ -21,7 +21,7 @@ Raylib.InitAudioDevice();
 Texture2D AvatarImage = Raylib.LoadTexture("gremory.png");
 Rectangle AvatarRect = new Rectangle(0, 0, AvatarImage.width, AvatarImage.height);
 Texture2D EnemyImage = Raylib.LoadTexture("Barbarossa.png");
-Rectangle EnemyRect = new Rectangle(0,768, EnemyImage.width, EnemyImage.height);
+Rectangle EnemyRect = new Rectangle(0, 768, EnemyImage.width, EnemyImage.height);
 int tileSize = 32;
 string currentScene = "start";
 int plrInfantryMov = 3;
@@ -43,81 +43,85 @@ while (!Raylib.WindowShouldClose())
     }
     if (currentScene == "plrTurn")
     {
-    if (plrInfantryMov >= 0)
-    {
-        if (Raylib.IsKeyReleased(KeyboardKey.KEY_RIGHT))
+        if (plrInfantryMov >= 0)
         {
-            AvatarRect.x += 32;
-            plrInfantryMov -= 1;
-            if (Raylib.IsKeyReleased(KeyboardKey.KEY_LEFT))
+            if (Raylib.IsKeyReleased(KeyboardKey.KEY_RIGHT))
             {
-                AvatarRect.x -= 32;
-                plrInfantryMov += 1;
+                AvatarRect.x += 32;
+                plrInfantryMov--;
+                if (Raylib.IsKeyReleased(KeyboardKey.KEY_LEFT))
+                {
+                    AvatarRect.x -= 32;
+                    plrInfantryMov++;
+                }
             }
-        }
-        else if (Raylib.IsKeyReleased(KeyboardKey.KEY_LEFT))
-        {
+            else if (Raylib.IsKeyReleased(KeyboardKey.KEY_LEFT))
+            {
 
-            AvatarRect.x -= 32;
-            plrInfantryMov -= 1;
-        }
-        else if (Raylib.IsKeyReleased(KeyboardKey.KEY_UP))
-        {
-            AvatarRect.y -= 32;
-            plrInfantryMov -= 1;
-        }
-        else if (Raylib.IsKeyReleased(KeyboardKey.KEY_DOWN))
-        {
-            AvatarRect.y += 32;
-            plrInfantryMov -= 1;
-        }
+                AvatarRect.x -= 32;
+                plrInfantryMov--;
+            }
+            else if (Raylib.IsKeyReleased(KeyboardKey.KEY_UP))
+            {
+                AvatarRect.y -= 32;
+                plrInfantryMov--;
+            }
+            else if (Raylib.IsKeyReleased(KeyboardKey.KEY_DOWN))
+            {
+                AvatarRect.y += 32;
+                plrInfantryMov--;
+            }
 
-        if (Raylib.CheckCollisionRecs(AvatarRect, EnemyRect))
-        {
-            currentScene = "gameOver";
-        }
+            if (Raylib.CheckCollisionRecs(AvatarRect, EnemyRect))
+            {
+                currentScene = "gameOver";
+            }
 
         }
+        
         if (plrInfantryMov < 0)
         {
-        currentScene = "nmyTurn";
+            currentScene = "nmyTurn";
+            nmyFlyingMov = 5;
         }
     }
-    if (currentScene == "nmyTurn")
+    else if (currentScene == "nmyTurn")
     {
-       if (AvatarRect.x > EnemyRect.x)
-       {
-        EnemyRect.x += 32;
-        nmyFlyingMov -= 1;
-       }
-       if (AvatarRect.x < EnemyRect.x)
-       {
-        EnemyRect.x -= 32;
-        nmyFlyingMov -= 1;
-       }
-       if (AvatarRect.y > EnemyRect.y)
-       {
-        EnemyRect.y += 32;
-        nmyFlyingMov -= 1;
-       }
-       if (AvatarRect.y < EnemyRect.y)
-       {
-        EnemyRect.y -= 32;
-        nmyFlyingMov -= 1;
-       }
-       if (nmyFlyingMov == 0)
-       {
+        if (AvatarRect.x > EnemyRect.x)
+        {
+            EnemyRect.x += 32;
+            nmyFlyingMov--;
+        }
+        else if (AvatarRect.x < EnemyRect.x)
+        {
+            EnemyRect.x -= 32;
+            nmyFlyingMov--;
+        }
+        else if (AvatarRect.y > EnemyRect.y)
+        {
+            EnemyRect.y += 32;
+            nmyFlyingMov--;
+        }
+        else if (AvatarRect.y < EnemyRect.y)
+        {
+            EnemyRect.y -= 32;
+            nmyFlyingMov--;
+        }
+        
+        if (nmyFlyingMov < 0 || nmyFlyingMov == 0)
+        {
             currentScene = "plrTurn";
-       }
+            plrInfantryMov = 3;
+        }
     }
-    if (currentScene == "gameOver")
+    else if (currentScene == "gameOver")
     {
         if (Raylib.IsKeyPressed(KeyboardKey.KEY_ENTER))
         {
             currentScene = "plrTurn";
         }
     }
-    if (currentScene == "end")
+    else if (currentScene == "end")
     {
         // as of yet, not achievable
     }
@@ -131,14 +135,17 @@ while (!Raylib.WindowShouldClose())
     }
     if (currentScene == "plrTurn" || currentScene == "nmyTurn")
     {
+        Raylib.StopMusicStream(MainTheme);
         Raylib.PlayMusicStream(ChasingDaybreak);
         Raylib.UpdateMusicStream(ChasingDaybreak);
     }
     if (currentScene == "gameOver")
     {
+        Raylib.StopMusicStream(ChasingDaybreak);
     }
     if (currentScene == "end")
     {
+        Raylib.StopMusicStream(ChasingDaybreak);
         Raylib.PlayMusicStream(HeritorsOfArcadia);
     }
 
@@ -153,29 +160,27 @@ while (!Raylib.WindowShouldClose())
     }
     if (currentScene == "plrTurn" || currentScene == "nmyTurn")
     {
-      Raylib.DrawTexture(AvatarImage, (int)AvatarRect.x, (int)AvatarRect.y, Color.WHITE);
-      Raylib.DrawTexture(EnemyImage, (int)EnemyRect.x, (int)EnemyRect.y, Color.WHITE);
+        Raylib.DrawTexture(AvatarImage, (int)AvatarRect.x, (int)AvatarRect.y, Color.WHITE);
+        Raylib.DrawTexture(EnemyImage, (int)EnemyRect.x, (int)EnemyRect.y, Color.WHITE);
 
-      for (int x = 0; x < Raylib.GetScreenWidth() + 1 / tileSize; x++)
-      {
-          Raylib.DrawLine(x * tileSize, 0, x * tileSize, Raylib.GetScreenHeight(), Color.BLACK);
-      }
-      for (int y = 0; y < Raylib.GetScreenHeight() / tileSize; y++)
-      {
-          Raylib.DrawLine(Raylib.GetScreenWidth(), y * tileSize, 0, y * tileSize, Color.BLACK);
-      }
+        for (int x = 0; x < Raylib.GetScreenWidth() + 1 / tileSize; x++)
+        {
+            Raylib.DrawLine(x * tileSize, 0, x * tileSize, Raylib.GetScreenHeight(), Color.BLACK);
+        }
+        for (int y = 0; y < Raylib.GetScreenHeight() / tileSize; y++)
+        {
+            Raylib.DrawLine(Raylib.GetScreenWidth(), y * tileSize, 0, y * tileSize, Color.BLACK);
+        }
     }
     if (currentScene == "gameOver")
     {
-        Raylib.DrawText ("crinch", 100, 300, 38, Color.RED);
+        Raylib.DrawText("crinch", 100, 300, 38, Color.RED);
     }
     if (currentScene == "end")
     {
-        Raylib.DrawText ("impossible", 100, 300, 38, Color.DARKBLUE);
+        Raylib.DrawText("impossible", 100, 300, 38, Color.DARKBLUE);
     }
 
     // hielo
     Raylib.EndDrawing();
 }
-
-// 私はばかです。
