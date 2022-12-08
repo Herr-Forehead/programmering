@@ -24,7 +24,7 @@ Texture2D EnemyImage = Raylib.LoadTexture("Barbarossa.png");
 Rectangle EnemyRect = new Rectangle(0, 768, EnemyImage.width, EnemyImage.height);
 int tileSize = 32;
 string currentScene = "start";
-int plrInfantryMov = 3;
+int plrInfantryMov = 2;
 int nmyFlyingMov = 5;
 Music MainTheme = Raylib.LoadMusicStream("MainTheme.mp3");
 Music ChasingDaybreak = Raylib.LoadMusicStream("ChasingDaybreak.mp3");
@@ -41,7 +41,7 @@ while (!Raylib.WindowShouldClose())
             currentScene = "plrTurn";
         }
     }
-    if (currentScene == "plrTurn")
+    else if (currentScene == "plrTurn")
     {
         if (plrInfantryMov >= 0)
         {
@@ -111,7 +111,7 @@ while (!Raylib.WindowShouldClose())
         if (nmyFlyingMov < 0 || nmyFlyingMov == 0)
         {
             currentScene = "plrTurn";
-            plrInfantryMov = 3;
+            plrInfantryMov = 2;
         }
     }
     else if (currentScene == "gameOver")
@@ -174,6 +174,7 @@ while (!Raylib.WindowShouldClose())
     }
     if (currentScene == "gameOver")
     {
+        Raylib.ClearBackground(Color.BLACK);
         Raylib.DrawText("crinch", 100, 300, 38, Color.RED);
     }
     if (currentScene == "end")
