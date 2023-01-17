@@ -73,7 +73,7 @@ while (!Raylib.WindowShouldClose())
         {
             Selector.y += 32;
         }
-        if (Raylib.CheckCollisionRecs(Selector, AvatarRect) == true && Raylib.IsKeyPressed(KeyboardKey.KEY_ENTER) || Raylib.CheckCollisionRecs(Selector, AvatarRect) == true && Raylib.IsKeyPressed(KeyboardKey.KEY_SPACE))
+        if (Raylib.CheckCollisionRecs(Selector, AvatarRect) == true && Raylib.IsKeyDown(KeyboardKey.KEY_ENTER) || Raylib.CheckCollisionRecs(Selector, AvatarRect) == true && Raylib.IsKeyDown(KeyboardKey.KEY_SPACE))
         {
             if (plrInfMov >= 0)
             {
@@ -97,17 +97,9 @@ while (!Raylib.WindowShouldClose())
                     AvatarRect.y += 32;
                     plrInfMov--;
                 }
-                if (Raylib.CheckCollisionRecs(AvatarRect, EnemyRect) || Raylib.CheckCollisionRecs(AvatarRect2, EnemyRect))
-                {
-                    currentScene = "death";
-                    if (Raylib.CheckCollisionRecs(AvatarRect, EnemyRect) || Raylib.CheckCollisionRecs(AvatarRect2, EnemyRect))
-                    {
-                        currentScene = "gameOver";
-                    }
-                }
             }
         }
-        else if (Raylib.CheckCollisionRecs(Selector, AvatarRect2) == true && Raylib.IsKeyPressed(KeyboardKey.KEY_ENTER) || Raylib.CheckCollisionRecs(Selector, AvatarRect2) == true && Raylib.IsKeyPressed(KeyboardKey.KEY_SPACE))
+        else if (Raylib.CheckCollisionRecs(Selector, AvatarRect2) == true && Raylib.IsKeyDown(KeyboardKey.KEY_ENTER) || Raylib.CheckCollisionRecs(Selector, AvatarRect2) == true && Raylib.IsKeyDown(KeyboardKey.KEY_SPACE))
         {
             if (plrInfMov2 >= 0)
             {
@@ -134,17 +126,18 @@ while (!Raylib.WindowShouldClose())
                 }
             }
         }
+        if (Raylib.CheckCollisionRecs(AvatarRect, EnemyRect))
+        {
+            currentScene = "gameOver";
+        }
+        if (Raylib.CheckCollisionRecs(AvatarRect2, EnemyRect))
+        {
+           currentScene = "death";
+        }
         if (plrInfMov < 0 && plrInfMov2 < 0)
         {
             currentScene = "nmyTurn";
             nmyFlyMov = 5;
-        }
-    }
-    else if (currentScene == "death")
-    {
-        if (Raylib.IsKeyPressed(KeyboardKey.KEY_ENTER))
-        {
-            currentScene = "plrTurn";
         }
     }
     else if (currentScene == "nmyTurn")
@@ -169,12 +162,26 @@ while (!Raylib.WindowShouldClose())
             EnemyRect.y -= 32;
             nmyFlyMov--;
         }
-
+        if (Raylib.CheckCollisionRecs(AvatarRect, EnemyRect))
+        {
+            currentScene = "gameOver";
+        }
+        if (Raylib.CheckCollisionRecs(AvatarRect2, EnemyRect))
+        {
+           currentScene = "death";
+        }
         if (nmyFlyMov < 0 || nmyFlyMov == 0)
         {
             currentScene = "plrTurn";
             plrInfMov = 2;
             plrInfMov2 = 2;
+        }
+    }
+    else if (currentScene == "death")
+    {
+        if (Raylib.IsKeyPressed(KeyboardKey.KEY_ENTER))
+        {
+            currentScene = "plrTurn";
         }
     }
     else if (currentScene == "gameOver")
@@ -230,13 +237,12 @@ while (!Raylib.WindowShouldClose())
     {
         Raylib.DrawText("press Enter to start", 100, 300, 48, Color.DARKBLUE);
     }
-    if (currentScene == "plrTurn" || currentScene == "nmyTurn")
+    else if (currentScene == "plrTurn" || currentScene == "nmyTurn")
     {
         Raylib.DrawTexture(bkgImage, 0, 0, Color.WHITE);
         Raylib.DrawTexture(AvatarImage, (int)AvatarRect.x, (int)AvatarRect.y, Color.WHITE);
         Raylib.DrawTexture(AvatarImage2, (int)AvatarRect2.x, (int)AvatarRect2.y, Color.WHITE);
         Raylib.DrawTexture(EnemyImage, (int)EnemyRect.x, (int)EnemyRect.y, Color.WHITE);
-        // Raylib.DrawRectangle(0, 0, (int)Selector.width, (int)Selector.height, selectorBlue);
         Raylib.DrawRectangleRec(Selector, selectorBlue);
 
         for (int x = 0; x < Raylib.GetScreenWidth() + 1 / tileSize; x++)
@@ -248,12 +254,16 @@ while (!Raylib.WindowShouldClose())
             Raylib.DrawLine(Raylib.GetScreenWidth(), y * tileSize, 0, y * tileSize, Color.BLACK);
         }
     }
-    if (currentScene == "gameOver")
+    else if (currentScene == "Death")
+    {
+        Raylib.ClearBackground(Color.WHITE);
+    }
+    else if (currentScene == "gameOver")
     {
         Raylib.ClearBackground(Color.BLACK);
         Raylib.DrawText("crinch", 100, 300, 38, Color.RED);
     }
-    if (currentScene == "end")
+    else if (currentScene == "end")
     {
         Raylib.DrawText("impossible", 100, 300, 38, Color.DARKBLUE);
     }
