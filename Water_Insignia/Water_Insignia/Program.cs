@@ -41,6 +41,8 @@ int nmyFlyMov = 5;
 Music MainTheme = Raylib.LoadMusicStream("MainTheme.mp3");
 Music ChasingDaybreak = Raylib.LoadMusicStream("ChasingDaybreak.mp3");
 Music HeritorsOfArcadia = Raylib.LoadMusicStream("HeritorsOfArcadia.mp3");
+Music gameOverSerious6b = Raylib.LoadMusicStream("gameOver(Serious6b).mp3");
+Music death = Raylib.LoadMusicStream("death.mp3");
 
 while (!Raylib.WindowShouldClose())
 {
@@ -71,7 +73,7 @@ while (!Raylib.WindowShouldClose())
         {
             Selector.y += 32;
         }
-        if (Raylib.CheckCollisionRecs(Selector, AvatarRect) == true && Raylib.IsKeyReleased(KeyboardKey.KEY_ENTER) || Raylib.CheckCollisionRecs(Selector, AvatarRect) == true && Raylib.IsKeyReleased(KeyboardKey.KEY_SPACE))
+        if (Raylib.CheckCollisionRecs(Selector, AvatarRect) == true && Raylib.IsKeyPressed(KeyboardKey.KEY_ENTER) || Raylib.CheckCollisionRecs(Selector, AvatarRect) == true && Raylib.IsKeyPressed(KeyboardKey.KEY_SPACE))
         {
             if (plrInfMov >= 0)
             {
@@ -97,11 +99,15 @@ while (!Raylib.WindowShouldClose())
                 }
                 if (Raylib.CheckCollisionRecs(AvatarRect, EnemyRect) || Raylib.CheckCollisionRecs(AvatarRect2, EnemyRect))
                 {
-                    currentScene = "gameOver";
+                    currentScene = "death";
+                    if (Raylib.CheckCollisionRecs(AvatarRect, EnemyRect) || Raylib.CheckCollisionRecs(AvatarRect2, EnemyRect))
+                    {
+                        currentScene = "gameOver";
+                    }
                 }
             }
         }
-        if (Raylib.CheckCollisionRecs(Selector, AvatarRect2) == true && Raylib.IsKeyReleased(KeyboardKey.KEY_ENTER) || Raylib.CheckCollisionRecs(Selector, AvatarRect2) == true && Raylib.IsKeyReleased(KeyboardKey.KEY_SPACE))
+        else if (Raylib.CheckCollisionRecs(Selector, AvatarRect2) == true && Raylib.IsKeyPressed(KeyboardKey.KEY_ENTER) || Raylib.CheckCollisionRecs(Selector, AvatarRect2) == true && Raylib.IsKeyPressed(KeyboardKey.KEY_SPACE))
         {
             if (plrInfMov2 >= 0)
             {
@@ -134,6 +140,13 @@ while (!Raylib.WindowShouldClose())
             nmyFlyMov = 5;
         }
     }
+    else if (currentScene == "death")
+    {
+        if (Raylib.IsKeyPressed(KeyboardKey.KEY_ENTER))
+        {
+            currentScene = "plrTurn";
+        }
+    }
     else if (currentScene == "nmyTurn")
     {
         if (AvatarRect.x > EnemyRect.x)
@@ -161,6 +174,7 @@ while (!Raylib.WindowShouldClose())
         {
             currentScene = "plrTurn";
             plrInfMov = 2;
+            plrInfMov2 = 2;
         }
     }
     else if (currentScene == "gameOver")
@@ -182,17 +196,26 @@ while (!Raylib.WindowShouldClose())
         Raylib.PlayMusicStream(MainTheme);
         Raylib.UpdateMusicStream(MainTheme);
     }
-    if (currentScene == "plrTurn" || currentScene == "nmyTurn")
+    else if (currentScene == "plrTurn" || currentScene == "nmyTurn")
     {
-        Raylib.StopMusicStream(MainTheme);
+        Raylib.StopMusicStream(MainTheme); 
+        Raylib.StopMusicStream(death);
         Raylib.PlayMusicStream(ChasingDaybreak);
         Raylib.UpdateMusicStream(ChasingDaybreak);
     }
-    if (currentScene == "gameOver")
+    else if (currentScene == "death")
     {
         Raylib.StopMusicStream(ChasingDaybreak);
+        Raylib.PlayMusicStream(death);
+        Raylib.UpdateMusicStream(death);
     }
-    if (currentScene == "end")
+    else if (currentScene == "gameOver")
+    {
+        Raylib.StopMusicStream(ChasingDaybreak);
+        Raylib.PlayMusicStream(gameOverSerious6b);
+        Raylib.UpdateMusicStream(gameOverSerious6b);
+    }
+    else if (currentScene == "end")
     {
         Raylib.StopMusicStream(ChasingDaybreak);
         Raylib.PlayMusicStream(HeritorsOfArcadia);
