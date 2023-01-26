@@ -60,6 +60,7 @@ while (!Raylib.WindowShouldClose())
     }
     else if (currentScene == "plrTurn")
     {
+        // movement
         AvatarRect = AvatarRectStart;
         AvatarRect2 = AvatarRect2Start;
         if (Raylib.IsKeyReleased(KeyboardKey.KEY_RIGHT))
@@ -78,6 +79,7 @@ while (!Raylib.WindowShouldClose())
         {
             Selector.y += 32;
         }
+        // moving characters
         if (Raylib.CheckCollisionRecs(Selector, AvatarRectStart) == true && Raylib.IsKeyDown(KeyboardKey.KEY_ENTER) || Raylib.CheckCollisionRecs(Selector, AvatarRectStart) == true && Raylib.IsKeyDown(KeyboardKey.KEY_SPACE))
         {
             if (plrInfMov >= 0)
@@ -131,15 +133,18 @@ while (!Raylib.WindowShouldClose())
                 }
             }
         }
+        // death condition
         if (Raylib.CheckCollisionRecs(AvatarRectStart, EnemyRect) || Raylib.CheckCollisionRecs(AvatarRect2Start, EnemyRect))
         {
             currentScene = "death";
             characters -= 1;
         }
+        // game over condition
         if (characters < 0 || characters == 0)
         {
             currentScene = "gameOver";
         }
+        // enemy movement amount reset
         if (plrInfMov < 0 && plrInfMov2 < 0)
         {
             currentScene = "nmyTurn";
@@ -148,6 +153,7 @@ while (!Raylib.WindowShouldClose())
     }
     else if (currentScene == "nmyTurn")
     {
+        // enemny movement algorithm
         if (AvatarRectStart.x > EnemyRect.x)
         {
             EnemyRect.x += 32;
@@ -168,10 +174,12 @@ while (!Raylib.WindowShouldClose())
             EnemyRect.y -= 32;
             nmyFlyMov--;
         }
+        // death condition
         if (Raylib.CheckCollisionRecs(AvatarRectStart, EnemyRect) || Raylib.CheckCollisionRecs(AvatarRect2Start, EnemyRect))
         {
             currentScene = "death";
         }
+        // avatar movement reset
         if (nmyFlyMov < 0 || nmyFlyMov == 0)
         {
             currentScene = "plrTurn";
@@ -181,6 +189,7 @@ while (!Raylib.WindowShouldClose())
     }
     else if (currentScene == "death")
     {
+        
         if (Raylib.IsKeyPressed(KeyboardKey.KEY_ENTER))
         {
             currentScene = "start";
