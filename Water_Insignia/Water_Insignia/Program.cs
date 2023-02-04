@@ -80,6 +80,9 @@ while (!Raylib.WindowShouldClose())
             Selector.y += 32;
         }
         // moving characters
+
+        // Give avatar characters movement and movement limits
+        // Make it so they only move when in contact with selector
         if (Raylib.CheckCollisionRecs(Selector, AvatarRectStart) == true && Raylib.IsKeyDown(KeyboardKey.KEY_ENTER) || Raylib.CheckCollisionRecs(Selector, AvatarRectStart) == true && Raylib.IsKeyDown(KeyboardKey.KEY_SPACE))
         {
             if (plrInfMov >= 0)
@@ -154,6 +157,9 @@ while (!Raylib.WindowShouldClose())
     else if (currentScene == "nmyTurn")
     {
         // enemny movement algorithm
+
+        // Give enemy movement and movement limit
+        // Make enemy movement based off of avatar position
         if (AvatarRectStart.x > EnemyRect.x)
         {
             EnemyRect.x += 32;
